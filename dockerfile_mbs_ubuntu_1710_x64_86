@@ -1,10 +1,9 @@
 FROM ubuntu:17.10
-MAINTAINER doc_bacardi@users.sourceforge.net
 LABEL Description="This image contains the build environment for the MBS system on Ubuntu 17.10 x64_86."
 
 # Install the common packages.
 RUN apt-get update
-RUN apt-get install --assume-yes curl gcc g++ git lib32z1 make python2.7
+RUN apt-get install --assume-yes curl gcc g++ git lib32z1 make python2.7 sudo
 
 # Add the repository for the build tools and install the key.
 RUN echo 'deb http://download.opensuse.org/repositories/home:/doc_bacardi/xUbuntu_17.10/ /' > /etc/apt/sources.list.d/build_opensuse_org_home_docbacardi.list
@@ -12,7 +11,7 @@ RUN curl --location --silent http://download.opensuse.org/repositories/home:doc_
 RUN apt-get update
 
 # Install the build tools from the new repository.
-RUN apt-get install --assume-yes cmake3 mingw-w64-mbs swig
+RUN apt-get install --assume-yes cmake3 mingw-w64-mbs swig3
 
 # Create a working folder.
 RUN mkdir /tmp/work
