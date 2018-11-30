@@ -11,7 +11,7 @@ RUN curl --location --silent http://download.opensuse.org/repositories/home:doc_
 RUN apt-get update
 
 # Install the build tools from the new repository.
-RUN apt-get install --assume-yes cmake3 gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf mingw-w64-mbs swig3
+RUN apt-get install --assume-yes cmake3 gcc-aarch64-linux-gnu g++-aarch64-linux-gnu mingw-w64-mbs swig3
 
 # Create a working folder.
 RUN mkdir /tmp/work
