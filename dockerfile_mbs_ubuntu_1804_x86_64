@@ -3,15 +3,7 @@ LABEL Description="This image contains the build environment for the MBS system 
 
 # Install the common packages.
 RUN apt-get update
-RUN apt-get install --assume-yes curl gcc g++ git gnupg lib32z1 make python2.7 sudo
-
-# Add the repository for the build tools and install the key.
-RUN echo 'deb http://download.opensuse.org/repositories/home:/doc_bacardi/xUbuntu_18.04/ /' > /etc/apt/sources.list.d/build_opensuse_org_home_docbacardi.list
-RUN curl --location --silent http://download.opensuse.org/repositories/home:doc_bacardi/xUbuntu_18.04/Release.key | apt-key add -
-RUN apt-get update
-
-# Install the build tools from the new repository.
-RUN apt-get install --assume-yes cmake3 gcc-aarch64-linux-gnu g++-aarch64-linux-gnu mingw-w64-mbs swig3
+RUN apt-get install --assume-yes cmake curl gcc gcc-aarch64-linux-gnu g++ g++-aarch64-linux-gnu git gnupg lib32z1 make mingw-w64 python2.7 sudo swig
 
 RUN dpkg --add-architecture arm64
 RUN sed -i 's/^deb /deb [arch=amd64,i386] /g' /etc/apt/sources.list
