@@ -3,7 +3,7 @@ LABEL Description="This image contains the build environment for the MBS system 
 
 # Install the common packages.
 RUN apt-get update
-RUN apt-get install --assume-yes cmake curl gcc gcc-aarch64-linux-gnu g++ g++-aarch64-linux-gnu git gnupg make mingw-w64 python2.7 sudo swig
+RUN apt-get install --assume-yes cmake curl gcc gcc-aarch64-linux-gnu g++ g++-aarch64-linux-gnu git gnupg make mingw-w64 python2.7 python3 sudo swig
 
 RUN dpkg --add-architecture arm64
 RUN sed -i 's/^deb /deb [arch=amd64,i386] /g' /etc/apt/sources.list
