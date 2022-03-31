@@ -2,8 +2,8 @@ FROM ubuntu:20.04
 LABEL Description="This image contains the build environment for the MBS system on Ubuntu 20.04 x86_64."
 
 # Install the common packages.
-RUN apt-get update
-RUN apt-get install --assume-yes cmake curl gcc gcc-aarch64-linux-gnu g++ g++-aarch64-linux-gnu git gnupg lib32z1 make mingw-w64 python2.7 python3 sudo swig
+RUN DEBIAN_FRONTEND=noninteractive apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes cmake curl gcc gcc-aarch64-linux-gnu g++ g++-aarch64-linux-gnu git gnupg lib32z1 make mingw-w64 python2.7 python3 sudo swig
 
 RUN dpkg --add-architecture arm64
 RUN sed -i 's/^deb /deb [arch=amd64,i386] /g' /etc/apt/sources.list
