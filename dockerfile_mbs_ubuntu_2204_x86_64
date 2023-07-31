@@ -4,7 +4,7 @@ LABEL org.opencontainers.image.source https://github.com/muhkuh-sys/mbs-docker-i
 
 # Install the common packages.
 RUN DEBIAN_FRONTEND=noninteractive apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes cmake curl gcc gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf gcc-riscv64-linux-gnu g++ g++-aarch64-linux-gnu g++-riscv64-linux-gnu g++-arm-linux-gnueabihf git gnupg lib32z1 make mingw-w64 python2.7 python3 sudo swig
+RUN DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes binfmt-support cmake curl gcc gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf gcc-riscv64-linux-gnu g++ g++-aarch64-linux-gnu g++-riscv64-linux-gnu g++-arm-linux-gnueabihf git gnupg lib32z1 make mingw-w64 python2.7 python3 qemu-user sudo swig
 
 RUN dpkg --add-architecture armhf
 RUN dpkg --add-architecture arm64
@@ -14,6 +14,11 @@ RUN echo "deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports focal main unive
 RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports focal main universe" >>/etc/apt/sources.list
 RUN echo "deb [arch=riscv64] http://ports.ubuntu.com/ubuntu-ports focal main universe" >>/etc/apt/sources.list
 RUN apt-get update
+
+RUN mkdir -p mkdir /etc/qemu-binfmt/
+RUN ln --symbolic /usr/aarch64-linux-gnu/   /etc/qemu-binfmt/aarch64
+RUN ln --symbolic /usr/arm-linux-gnueabihf/ /etc/qemu-binfmt/arm
+RUN ln --symbolic /usr/riscv64-linux-gnu/   /etc/qemu-binfmt/riscv64
 
 # Create a working folder.
 RUN mkdir /tmp/work
