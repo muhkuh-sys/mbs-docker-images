@@ -1,5 +1,6 @@
 FROM ubuntu:18.04
 LABEL Description="This image contains the build environment for the MBS system on Ubuntu 18.04 x86_64."
+LABEL org.opencontainers.image.source https://github.com/muhkuh-sys/mbs-docker-images
 
 # Install the common packages.
 RUN apt-get update
