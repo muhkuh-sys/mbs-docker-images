@@ -15,12 +15,15 @@ jobs:
 
     strategy:
       matrix:
-#        IMAGE_NAME: mbs_ubuntu_2004_arm64
-#        IMAGE_NAME: mbs_ubuntu_2004_x86
-        IMAGE_NAME: mbs_ubuntu_2004_x86_64
-#        IMAGE_NAME: mbs_ubuntu_2204_arm64
-#        IMAGE_NAME: mbs_ubuntu_2204_riscv64
-        IMAGE_NAME: mbs_ubuntu_2204_x86_64
+        container:
+#          IMAGE_NAME: mbs_ubuntu_2004_arm64
+#          IMAGE_NAME: mbs_ubuntu_2004_x86
+        - name: "20.04 x86_64"
+          image: mbs_ubuntu_2004_x86_64
+#          IMAGE_NAME: mbs_ubuntu_2204_arm64
+#          IMAGE_NAME: mbs_ubuntu_2204_riscv64
+        - name: "22.04 x86_64"
+          image: mbs_ubuntu_2204_x86_64
 
     permissions:
       contents: read
@@ -40,13 +43,13 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5.5.1
       with:
-        images: ${{env.REGISTRY}}/dockerfile_${{matrix.IMAGE_NAME}}
+        images: ${{env.REGISTRY}}/dockerfile_${{matrix.container.image}}
     - name: Build and push Docker image
       id: push
       uses: docker/build-push-action@v5.3.0
       with:
         context: .
-        file: ./dockerfile_${{matrix.IMAGE_NAME}}
+        file: ./dockerfile_${{matrix.container.image}}
         push: false
-        tags: ghcr.io/muhkuh-sys/${{matrix.IMAGE_NAME}} ${{steps.meta.outputs.tags}}
+        tags: ghcr.io/muhkuh-sys/${{matrix.container.image}} ${{steps.meta.outputs.tags}}
         labels: ${{steps.meta.outputs.labels}}
