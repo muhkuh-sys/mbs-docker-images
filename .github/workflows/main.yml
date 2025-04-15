@@ -16,14 +16,18 @@ jobs:
     strategy:
       matrix:
         container:
-#          IMAGE_NAME: mbs_ubuntu_2004_arm64
-#          IMAGE_NAME: mbs_ubuntu_2004_x86
-        - name: "20.04 x86_64"
-          image: mbs_ubuntu_2004_x86_64
-#          IMAGE_NAME: mbs_ubuntu_2204_arm64
-#          IMAGE_NAME: mbs_ubuntu_2204_riscv64
-        - name: "22.04 x86_64"
-          image: mbs_ubuntu_2204_x86_64
+#        - name: "20.04 arm64"
+#          image: "mbs_ubuntu_2004_arm64"
+#        - name: "20.04 x86_64"
+#          image: "mbs_ubuntu_2004_x86_64"
+#        - name: "22.04 arm64"
+#          image: "mbs_ubuntu_2204_arm64"
+#        - name: "22.04 riscv64"
+#          image: "mbs_ubuntu_2204_riscv64"
+#        - name: "22.04 x86_64"
+#          image: "mbs_ubuntu_2204_x86_64"
+        - name: "24.04 x86_64"
+          image: "mbs_ubuntu_2404_x86_64"
 
     permissions:
       contents: read
