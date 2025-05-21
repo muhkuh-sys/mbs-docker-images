@@ -1,0 +1,14 @@
+FROM ubuntu:24.04
+
+# Set noninteractive mode for apt
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update package list and install Lua
+RUN apt-get update && \
+    apt-get install -y lua5.4\*
+
+RUN dpkg --add-architecture arm64
+
+
+# Start interactive Lua REPL by default
+CMD ["lua5.4"]
