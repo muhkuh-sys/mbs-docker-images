@@ -1,21 +1,13 @@
 FROM ubuntu:24.04
-LABEL Description="This image contains the build environment for the MBS system on Ubuntu 24.04 x86_64."
-LABEL org.opencontainers.image.source https://github.com/muhkuh-sys/mbs-docker-images
 
-# Install the common packages.
-RUN DEBIAN_FRONTEND=noninteractive apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes binfmt-support cmake curl gcc gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf gcc-riscv64-linux-gnu g++ g++-aarch64-linux-gnu g++-riscv64-linux-gnu g++-arm-linux-gnueabihf git gnupg lib32z1 make mingw-w64 python3 qemu-user sudo swig
+# Set noninteractive mode for apt
+ENV DEBIAN_FRONTEND=noninteractive
 
-RUN dpkg --add-architecture arm64
-RUN dpkg --add-architecture riscv64
-RUN sed -i 's/^deb /deb [arch=amd64,i386] /g' /etc/apt/sources.list
-RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports focal main universe" >>/etc/apt/sources.list
-RUN echo "deb [arch=riscv64] http://ports.ubuntu.com/ubuntu-ports focal main universe" >>/etc/apt/sources.list
-RUN apt-get update
+# Update package list and install Lua
+RUN apt-get update && \
+    apt-get install -y lua5.4 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p mkdir /etc/qemu-binfmt/
-RUN ln --symbolic /usr/aarch64-linux-gnu/   /etc/qemu-binfmt/aarch64
-RUN ln --symbolic /usr/riscv64-linux-gnu/   /etc/qemu-binfmt/riscv64
-
-# Create a working folder.
-RUN mkdir /tmp/work
+# Start interactive Lua REPL by default
+CMD ["lua5.4"]
