@@ -1,7 +1,15 @@
 FROM ubuntu:24.04
 
 # Set noninteractive mode for apt
-ENV DEBIAN_FRONTEND=noninteractive
+# Install the common packages.
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get update
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes binfmt-support cmake curl gcc g++ git gnupg make python3 sudo swig
+
+# Create a working folder.
+
+RUN mkdir /tmp/work
 
 # Update package list and install Lua
 RUN apt-get update && \

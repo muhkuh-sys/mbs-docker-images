@@ -1,7 +1,9 @@
 FROM ubuntu:24.04
 
 # Set noninteractive mode for apt
-ENV DEBIAN_FRONTEND=noninteractive
+# Install the common packages.
+RUN DEBIAN_FRONTEND=noninteractive apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes binfmt-support cmake curl gcc g++ git gnupg make python3 sudo swig
 
 # Update package list and install Lua
 RUN apt-get update && \
@@ -9,6 +11,7 @@ RUN apt-get update && \
 
 RUN dpkg --add-architecture arm64
 
+RUN mkdir /tmp/work
 
 # Start interactive Lua REPL by default
 CMD ["lua5.4"]
