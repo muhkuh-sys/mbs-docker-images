@@ -3,14 +3,11 @@ LABEL Description="This image contains the build environment for the MBS system 
 LABEL org.opencontainers.image.source https://github.com/muhkuh-sys/mbs-docker-images
 
 # Install the common packages.
-
 RUN DEBIAN_FRONTEND=noninteractive apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes binfmt-support cmake curl gcc g++ git gnupg make python3 sudo swig
 
 # Create a working folder.
-
 RUN mkdir /tmp/work
- 
 
 # Save some space.
 RUN apt-get clean && \
