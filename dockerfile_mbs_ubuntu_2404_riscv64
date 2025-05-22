@@ -1,4 +1,6 @@
 FROM ubuntu:24.04
+LABEL Description="This image contains the build environment for the MBS system on Ubuntu 24.04 riscv64."
+LABEL org.opencontainers.image.source https://github.com/muhkuh-sys/mbs-docker-images
 
 # Install the common packages.
 
