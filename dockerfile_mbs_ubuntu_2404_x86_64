@@ -13,10 +13,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes binfmt-support c
 
 RUN mkdir /tmp/work
 
-# Update package list and install Lua
-RUN apt-get install -y lua5.4 && \
-    apt-get clean && \
+# Save some space.
+RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-# Start interactive Lua REPL by default
-CMD ["lua5.4"]
