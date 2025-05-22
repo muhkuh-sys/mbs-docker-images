@@ -10,3 +10,7 @@ RUN dpkg --add-architecture arm64
 
 # Create a working folder.
 RUN mkdir /tmp/work
+
+# Save some space.
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
