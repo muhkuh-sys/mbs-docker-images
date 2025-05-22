@@ -6,8 +6,6 @@ LABEL org.opencontainers.image.source https://github.com/muhkuh-sys/mbs-docker-i
 RUN DEBIAN_FRONTEND=noninteractive apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes binfmt-support cmake curl gcc g++ git gnupg make python3 sudo swig
 
-RUN dpkg --add-architecture arm64
-
 # Create a working folder.
 RUN mkdir /tmp/work
 
